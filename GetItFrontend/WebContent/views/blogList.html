@@ -1,0 +1,79 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+<span>All Blogs!!!</span>
+<div class="clear top10"></div>
+<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+	<div ng-show="currentUser.role == 'ADMIN'">
+		<h3>List of Blogs Waiting Approval</h3>
+		<table class="table table-hover">
+			<tr class="tableHead">
+				<th class="alignCenter">Blog Title</th>
+				<th class="alignCenter">Blog Author</th>
+				<th class="alignCenter">Posted On</th>
+				<th></th>
+			</tr>
+			<tr ng-if="blogsWaitingApproval == 0">
+				<td colspan="5" class="alignCenter">No blogs waiting for approval.</td>
+			</tr>
+			<tr class="tableContent" ng-repeat="blogApproval in blogsWaitingApproval">
+				<td>{{blogApproval.blogTitle}}</td>
+				<td class="alignCenter">{{blogApproval.postedBy.firstName}} {{blogApproval.postedBy.lastName}}</td>
+				<td class="alignCenter">
+					{{blogApproval.postedOn | date:'MMM dd, yyyy @ hh:mm a'}}
+				</td>
+				<td>
+					<span class="cursorp">
+						<img src="resources/images/viewIcon.png" class="iconStyle" />
+					</span>
+					&nbsp;&nbsp;
+					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName">
+						<img src="resources/images/editIcon.png" class="iconStyle" />
+					</span>
+					&nbsp;&nbsp;
+					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName">
+						<img src="resources/images/deleteIcon.png" class="iconStyle" />
+					</span>
+				</td>
+			</tr>
+		</table>
+	</div>	
+	<div>
+		<h3>List of Blogs Approved</h3>
+		<table class="table table-hover">
+			<tr class="tableHead">
+				<th class="alignCenter">Blog Title</th>
+				<th class="alignCenter">Blog Author</th>
+				<th class="alignCenter">Posted On</th>
+				<th></th>
+			</tr>
+			<tr ng-if="blogsApproved.length == 0">
+				<td colspan="5" class="alignCenter">No approved blogs available.</td>
+			</tr>
+			<tr class="tableContent" ng-repeat="blog in blogsApproved">
+				<td>{{blog.blogTitle}}</td>
+				<td class="alignCenter">{{blog.postedBy.firstName}} {{blog.postedBy.lastName}}</td>
+				<td class="alignCenter">
+					{{blog.postedOn | date:'MMM dd, yyyy @ hh:mm a'}}
+				</td>
+				<td>
+					<span class="cursorp">
+						<img src="resources/images/viewIcon.png" class="iconStyle" />
+					</span>
+					&nbsp;&nbsp;
+					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName">
+						<img src="resources/images/editIcon.png" class="iconStyle" />
+					</span>
+					&nbsp;&nbsp;
+					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName">
+						<img src="resources/images/deleteIcon.png" class="iconStyle" />
+					</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+<div class="clear top10"></div>
+
+</div>
