@@ -1,13 +1,15 @@
 package com.niit.model;
 
 import java.util.Date;
-
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +27,8 @@ public class Blogs
 	private User postedBy;
 	private boolean approved;
 	private int likes;
+	@OneToMany(mappedBy="blog", fetch=FetchType.EAGER)
+	private List<BlogComments> blogComments;
 	public int getId() {
 		return id;
 	}
@@ -66,5 +70,11 @@ public class Blogs
 	}
 	public void setLikes(int likes) {
 		this.likes = likes;
+	}
+	public List<BlogComments> getBlogComments() {
+		return blogComments;
+	}
+	public void setBlogComments(List<BlogComments> blogComments) {
+		this.blogComments = blogComments;
 	}
 }
