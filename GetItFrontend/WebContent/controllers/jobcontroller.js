@@ -1,9 +1,10 @@
 /**
  * Job Controller
  */
-app.controller('JobController', function($scope, JobService, $location, $rootScope) 
+app.controller('JobController', function($scope, JobService, $location, $rootScope, $routeParams) 
 {	
-	$scope.showDetails = false;
+	var jobId = $routeParams.id;
+	
 	$scope.addJob = function() {
 		JobService.addJob($scope.job).then(function(response) {
 			console.log(response.data);
@@ -32,16 +33,6 @@ app.controller('JobController', function($scope, JobService, $location, $rootSco
 		});
 	}
 	
-	$scope.getJob = function(jobId) {
-		$scope.showDetails = true;
-		JobService.getJob(jobId).then(function(response) {
-			$scope.job = response.data
-		}, function(response) {
-			$scope.error = response.data;
-			$location.path("/login");
-		});
-	}
-	
 	function getAllJobs()
 	{
 		JobService.getAllJobs().then(function(response) {
@@ -53,6 +44,13 @@ app.controller('JobController', function($scope, JobService, $location, $rootSco
 		})
 	}
 	getAllJobs();   //function call
+	
+	JobService.getJob(jobId).then(function(response) {
+		$scope.job = response.data
+	}, function(response) {
+		$scope.error = response.data;
+		$location.path("/login");
+	});
 	
 	$scope.editJob = function(jobId) {
 		JobService.getJob(jobId).then(function(response) {

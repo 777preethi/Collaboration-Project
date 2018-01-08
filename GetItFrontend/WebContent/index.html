@@ -55,17 +55,40 @@
       <li><a href="#">Chat</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown cursorp" ng-show="currentUser.userName"> 
-        <a class="dropdown-toggle" data-toggle="dropdown">Welcome {{currentUser.userName | uppercase}}
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#/editprofile">Update Profile</a></li>
-          <li><a href="#">Change Picture</a></li>
-          <li><a ng-click="logout()">Logout</a></li>
-        </ul>
-      </li>
-      <li ng-hide="currentUser.userName"><a href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li ng-hide="currentUser.userName"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    	<li class="dropdown cursorp" ng-show="currentUser.userName"> 
+	        <a class="dropdown-toggle" data-toggle="dropdown">
+	        	<span class="glyphicon glyphicon-bell glyphiconStyle" ng-click="updateLength()"></span>
+	        	<span class="notificationStyle" ng-show="notificationLength > 0">{{notificationLength}}</span>
+	        </a>
+	        <ul class="dropdown-menu">
+	        	<li class="NotViewedNotificationStyle" ng-repeat="notViewed in notViewedNotification">
+	        		<a href="" ng-click="updateNotificationViewed(notViewed.id)">
+	        			"<b>{{notViewed.blogTitle}}</b>" is <b>{{notViewed.approvalStatus}}</b>
+	        			<span ng-show="notViewed.approvalStatus == 'Rejected'"> due to reason '{{notViewed.rejectionReason}}'</span>
+	        		</a>
+	        	</li>
+	        	<li class="ViewedNotificationStyle" ng-repeat="viewed in viewedNotification">
+	        		<a href="">
+	        			"<b>{{viewed.blogTitle}}</b>" is <b>{{viewed.approvalStatus}}</b>
+	        			<span ng-show="viewed.approvalStatus == 'Rejected'"> due to reason '{{viewed.rejectionReason}}'</span>
+	        		</a>
+	        	</li>
+	        </ul>
+      	</li>
+      	<li ng-show="currentUser.userName">
+      		<img src="http://localhost:8081/GetItMiddleware/getimage/{currentUser.userName}" width="40" height="40" />
+      	</li>
+	    <li class="dropdown cursorp" ng-show="currentUser.userName"> 
+	        <a class="dropdown-toggle" data-toggle="dropdown">Welcome {{currentUser.userName | uppercase}}
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#/editprofile">Update Profile</a></li>
+	          <li><a href="#/uploadPic">Change Picture</a></li>
+	          <li><a ng-click="logout()">Logout</a></li>
+	        </ul>
+	    </li>
+	    <li ng-hide="currentUser.userName"><a href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+	    <li ng-hide="currentUser.userName"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>

@@ -1,0 +1,57 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<div class="clear top10"></div>
+	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 panel panel-default">
+		<div class="panel-heading">
+			<b>{{blogDetails.blogTitle}}</b>
+			<b>Created By: </b>{{blogDetails.postedBy.firstName}}
+			<b>Created On: </b>{{blogDetails.postedOn | date:'MMM dd, yyyy @ hh:mm a'}}
+		</div>
+		<div class="panel-body">
+			<p>{{blogDetails.blogContent}}</p>
+			<p>
+				<span ng-show="liked" class="glyphicon glyphicon-thumbs-up likedStyle cursorp" ng-click="updateBlogLikes()"></span>
+				<span ng-show="!liked" class="glyphicon glyphicon-thumbs-up unlikedStyle cursorp" ng-click="updateBlogLikes()"></span>
+				{{blogDetails.likes}} Likes
+			</p>
+			<p>Blog Comments
+				<div class="form-group">
+				    <label for="blogComment" class="control-label">Blog Comment: </label>
+				    <textarea rows="3" cols="5" class="form-control" ng-model="blogComments.commentText"></textarea>
+				</div>
+				<div class="form-group" align="center">
+				    <button ng-click="addBlogComment()" type="submit" class="btn btn-default">Post Comment</button>
+				</div>
+				<div>
+					<a href="" ng-click="showComments()">{{blogDetails.blogComments.length}} Comments</a>
+					<ul ng-show="showComment">
+						<li ng-repeat="comment in blogDetails.blogComments | orderBy:'-commentedOn'">
+							{{comment.commentText}}<br>
+							<strong>Commented By: </strong>{{comment.user.userName}}<br>
+							<strong>Commented On: </strong>{{comment.commentedOn | date:'MMM dd, yyyy @ hh:mm a'}}
+						</li>
+					</ul>
+				</div>
+			</p>
+		</div>
+		<div class="clear top10"></div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="currentUser.role == 'ADMIN' && blogDetails.approved == 0">
+			<form id="blogForm">
+				<div class="form-group">
+					<label for="blogTittle" class="control-label">Approve/Reject Blog: </label>
+				    <input type="radio" class="form-control" ng-model="blogDetails.approved" value="true" ng-click="showRejectionText(false)">Approve
+				    <input type="radio" class="form-control" ng-model="blogDetails.approved" value="false" ng-click="showRejectionText(true)">Reject
+				</div>
+				<div class="form-group" ng-show="isRejected">
+				    <label for="blogContent" class="control-label">Blog Rejection Reason: </label>
+				    <textarea rows="3" cols="5" class="form-control" ng-model="rejectionReason"></textarea>
+				</div>
+				<div class="form-group" align="center">
+				    <button ng-click="updateApprovalStatus()" type="submit" class="btn btn-default">Approve/Reject Blog</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+	<div class="clear top10"></div>
+</div>

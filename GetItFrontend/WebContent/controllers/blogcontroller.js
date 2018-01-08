@@ -1,8 +1,15 @@
 /**
  * Blog Controller
  */
-app.controller('BlogController', function($scope, BlogService, $location, $rootScope) 
+app.controller('BlogController', function($scope, BlogService, $location, $rootScope, $routeParams) 
 {
+	var id = $routeParams.id;
+	$scope.isRejected = false;
+	$scope.showRejectionText = function(val) {
+		$scope.isRejected = val;
+	}
+	$scope.showComment = false;
+	
 	$scope.addBlog = function() {
 		BlogService.addBlog($scope.blog).then(function(response) {
 			console.log(response.data);
@@ -67,4 +74,134 @@ app.controller('BlogController', function($scope, BlogService, $location, $rootS
 			}
 		});
 	}
+	
+	BlogService.getBlogDetails(id).then(function(response){
+		$scope.blogDetails = response.data;
+	}, function(response) {
+		if(response.status == 401)
+		{
+			$scope.error = response.data;
+			$location.path("/login");
+		}
+	});
+	
+	$scope.updateApprovalStatus = function() {
+		BlogService.updateApprovalStatus($scope.blogDetails, $scope.rejectionReason).then(function(response){
+			$location.path("/getBlogs");
+		}, function(response) {
+			if(response.status == 401)
+			{
+				$scope.error = response.data;
+				$location.path("/login");
+			}
+			if(response.status == 500)
+			{
+				alert(response.data);
+				$scope.error = response.data;
+			}
+		});
+	}
+	
+	$scope.editBlog = function(blogId) {
+		BlogService.getBlogDetails(blogId).then(function(response) {
+			$rootScope.blog = response.data;
+			console.log(response.data);
+			$location.path("/editBlog");
+		}, function(response) {
+			$scope.error = response.data;
+			$location.path("/login");
+		});
+	}
+	
+	$scope.editJobSubmit = function() {
+		BlogService.editBlogSubmit($scope.blog).then(function(response) {
+			alert("Updated Blog Successfully.");
+			$location.path("/home");
+		}, function(response) {//401, 500
+			if(response.status == 401)
+			{
+				$location.path("/login");
+			}
+			if(response.status == 500)
+			{
+				$scope.error = response.data;
+				$location.path("/editBlog");
+			}
+		});
+	}
+	
+	$scope.deleteBlog = function(blogId) {
+		BlogService.deleteBlog(blogId).then(function(response){
+			alert("Deleted Blog Successfully.");
+			$location.path("/home");
+		}, function(response) {
+			if(response.status == 401)
+			{
+				$location.path("/login");
+			}
+			if(response.status == 500)
+			{
+				$scope.error = response.data;
+				$location.path("/editBlog");
+			}
+		});
+	}
+	
+	BlogService.userLiked(id).then(function(response) {
+		if(response.data == '')
+			$scope.liked = false;
+		else
+			$scope.liked = true;
+		alert($scope.liked);
+	}, function(response) {
+		if(response.status == 401)
+		{
+			$scope.error = response.data;
+			$location.path("/login");
+		}
+	});
+	
+	$scope.updateBlogLikes = function() {
+		BlogService.updateBlogLikes($scope.blogDetails).then(function(response) {
+			//update likes & alter the glyphicon thumbsup color
+			$scope.blogDetails = response.data;
+			$scope.liked = !$scope.liked;
+		}, function(response) {
+			if(response.status == 401)
+			{
+				$scope.error = response.data;
+				$location.path("/login");
+			}
+		});
+	}
+	
+	$scope.addBlogComment = function() {
+		if($scope.commentText == undefined)
+		{
+			alert("Please enter comment.");
+		}
+		else
+		{
+			BlogService.addBlogComment($scope.commentText,id).then(function(response) {
+				alert(response.status);
+				$scope.commentText = '';
+				$scope.blogDetails = response.data;	//List of all comments of that particular blog
+			}, function(response){
+				if(response.status == 401)
+				{
+					$scope.error = response.data;
+					$location.path("/login");
+				}
+				else
+				{
+					$scope.error = response.data;
+				}
+			});
+		}
+	}
+	
+	$scope.showComments = function() {
+		$scope.showComment = !$scope.showComment;
+	}
+	
 });

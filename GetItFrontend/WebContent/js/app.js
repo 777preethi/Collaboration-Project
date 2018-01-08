@@ -24,6 +24,10 @@ app.config(function($routeProvider) {
 		templateUrl: 'views/jobList.html',
 		controller: 'JobController'
 	})
+	.when('/getJob/:id', {
+		templateUrl: 'views/jobDetails.html',
+		controller: 'JobController'
+	})
 	.when('/editJob', {
 		templateUrl: 'views/editJob.html',
 		controller: 'JobController'
@@ -36,8 +40,24 @@ app.config(function($routeProvider) {
 		templateUrl: 'views/blogList.html',
 		controller: 'BlogController'
 	})
+	.when('/editBlog', { 
+		templateUrl: 'views/editBlog.html',
+		controller: 'BlogController'
+	})
+	.when('/getblogdetail/:id', {
+		templateUrl: 'views/blogDetails.html',
+		controller: 'BlogController'
+	})
+	.when('/home', {
+		templateUrl: 'views/home.html',
+		controller: 'HomeController'
+	})
+	.when('/uploadPic', {
+		templateUrl: 'views/profilePicture.html'
+	})
 	.otherwise({
-		templateUrl: 'views/home.html'
+		templateUrl: 'views/home.html',
+		controller: 'HomeController'
 	})
 })
 

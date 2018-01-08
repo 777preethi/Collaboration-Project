@@ -24,14 +24,14 @@
 				</td>
 				<td>
 					<span class="cursorp">
-						<img src="resources/images/viewIcon.png" class="iconStyle" />
+						<a href="#/getblogdetail/{{blogApproval.id}}"><img src="resources/images/viewIcon.png" class="iconStyle" /></a>
 					</span>
 					&nbsp;&nbsp;
-					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName">
+					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName" ng-click="editBlog(blogApproval.id)">
 						<img src="resources/images/editIcon.png" class="iconStyle" />
 					</span>
 					&nbsp;&nbsp;
-					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName">
+					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName" ng-click="deleteBlog(blogApproval.id)">
 						<img src="resources/images/deleteIcon.png" class="iconStyle" />
 					</span>
 				</td>
@@ -58,14 +58,14 @@
 				</td>
 				<td>
 					<span class="cursorp">
-						<img src="resources/images/viewIcon.png" class="iconStyle" />
+						<a href="#/getblogdetail/{{blog.id}}"><img src="resources/images/viewIcon.png" class="iconStyle" /></a>
 					</span>
 					&nbsp;&nbsp;
-					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName">
+					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName" ng-click="editBlog(blog.id)">
 						<img src="resources/images/editIcon.png" class="iconStyle" />
 					</span>
 					&nbsp;&nbsp;
-					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName">
+					<span class="cursorp" ng-show="currentUser.userName == blogApproval.postedBy.userName" ng-click="deleteBlog(blog.id)">
 						<img src="resources/images/deleteIcon.png" class="iconStyle" />
 					</span>
 				</td>

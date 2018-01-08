@@ -17,5 +17,37 @@ app.factory('BlogService', function($http) {
 		return $http.get(BASE_URL+"/getblogs/"+0);
 	}
 	
+	blogService.getBlogDetails = function(id) {
+		return $http.get(BASE_URL+"/getblogdetail/"+id);
+	}
+	
+	blogService.updateApprovalStatus = function(blogDetails,rejectionReason) {
+		if(rejectionReason == undefined)
+			return $http.put(BASE_URL+"/updateapprovalstatus?rejectionReason="+'Not Mentioned by Admin', blogDetails);			
+		else
+			return $http.put(BASE_URL+"/updateapprovalstatus?rejectionReason="+rejectionReason, blogDetails)
+	}
+	
+	blogService.editBlogSubmit = function(blog) 
+	{
+		return $http.put(BASE_URL+"/editblogsubmit",blog);
+	}
+	
+	blogService.deleteBlog = function(blogId) {
+		return $http.get(BASE_URL+"/deleteblog/"+blogId)
+	}
+	
+	blogService.userLiked = function(id) {
+		return $http.get(BASE_URL+"/userliked/"+id);
+	}
+	
+	blogSevice.updateBlogLikes = function(blogDetails) {
+		return $http.put(BASE_URL+"/updatebloglikes",blogDetails);
+	}
+	
+	blogService.addBlogComment = function(commentText, id) {
+		return $http.post(BASE_URL+"/addblogcomments?commentText="+commentText+"&id="+id);
+	}
+	
 	return blogService;
 });
