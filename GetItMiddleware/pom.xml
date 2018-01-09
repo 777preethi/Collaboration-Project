@@ -16,8 +16,8 @@
     </dependency>
     <dependency>
     	<groupId>com.niit</groupId>
-	    <artifactId>GetItBackend</artifactId>
-	    <version>0.0.1-SNAPSHOT</version>
+		<artifactId>GetItBackend</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
