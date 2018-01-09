@@ -3,7 +3,6 @@ package com.niit.configuration;
 import java.util.Properties;
 
 import javax.sql.DataSource;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -11,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import com.niit.model.BlogComments;
 import com.niit.model.BlogLikes;
 import com.niit.model.Blogs;
+import com.niit.model.Friend;
 import com.niit.model.Job;
 import com.niit.model.Notification;
 import com.niit.model.ProfilePicture;
@@ -33,7 +32,7 @@ public class DBConfiguration
 		hp.setProperty("hibernate.hbm2ddl.auto", "update");
 		hp.setProperty("hibernate.show_sql", "true");
 		lsfb.addProperties(hp);
-		Class classes[] = new Class[] {User.class, Job.class, Blogs.class, Notification.class, BlogLikes.class, BlogComments.class, ProfilePicture.class};
+		Class classes[] = new Class[] {User.class, Job.class, Blogs.class, Notification.class, BlogLikes.class, BlogComments.class, ProfilePicture.class, Friend.class};
 		return lsfb.addAnnotatedClasses(classes).buildSessionFactory();		
 	}
 	
