@@ -14,12 +14,16 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="controllers/homecontroller.js"></script>
+	<script type="text/javascript" src="services/homeservice.js"></script>
 	<script type="text/javascript" src="controllers/usercontroller.js"></script>
 	<script type="text/javascript" src="services/userservice.js"></script>
 	<script type="text/javascript" src="controllers/jobcontroller.js"></script>
 	<script type="text/javascript" src="services/jobservice.js"></script>
 	<script type="text/javascript" src="controllers/blogcontroller.js"></script>
 	<script type="text/javascript" src="services/blogservice.js"></script>
+	<script type="text/javascript" src="controllers/friendcontroller.js"></script>
+	<script type="text/javascript" src="services/friendservice.js"></script>
 </head>
 <body ng-app="app">
 <header>
@@ -44,12 +48,12 @@
           <li><a href="#/getBlogs">Get All Blogs</a></li>
         </ul>
       </li>
-      <li class="dropdown cursorp">
+      <li class="dropdown cursorp" ng-show="currentUser.userName">
         <a class="dropdown-toggle" data-toggle="dropdown">Friends
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Friend Requests</a></li>
-          <li><a href="#">My Friends</a></li>
+          <li><a href="#/friendRequests">Friend Requests</a></li>
+          <li><a href="#/friendsList">My Friends</a></li>
         </ul>
       </li>
       <li><a href="#">Chat</a></li>
