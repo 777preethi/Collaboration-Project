@@ -41,7 +41,7 @@ app.factory('BlogService', function($http) {
 		return $http.get(BASE_URL+"/userliked/"+id);
 	}
 	
-	blogSevice.updateBlogLikes = function(blogDetails) {
+	blogService.updateBlogLikes = function(blogDetails) {
 		return $http.put(BASE_URL+"/updatebloglikes",blogDetails);
 	}
 	

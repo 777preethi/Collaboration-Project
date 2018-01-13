@@ -45,12 +45,15 @@ app.controller('JobController', function($scope, JobService, $location, $rootSco
 	}
 	getAllJobs();   //function call
 	
-	JobService.getJob(jobId).then(function(response) {
-		$scope.job = response.data
-	}, function(response) {
-		$scope.error = response.data;
-		$location.path("/login");
-	});
+	if(jobId != undefined)
+	{
+		JobService.getJob(jobId).then(function(response) {
+			$scope.job = response.data
+		}, function(response) {
+			$scope.error = response.data;
+			$location.path("/login");
+		});
+	}
 	
 	$scope.editJob = function(jobId) {
 		JobService.getJob(jobId).then(function(response) {

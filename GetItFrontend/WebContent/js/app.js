@@ -24,7 +24,7 @@ app.config(function($routeProvider) {
 		templateUrl: 'views/jobList.html',
 		controller: 'JobController'
 	})
-	.when('/getJob/:id', {
+	.when('/getjob/:id', {
 		templateUrl: 'views/jobDetails.html',
 		controller: 'JobController'
 	})
@@ -62,6 +62,10 @@ app.config(function($routeProvider) {
 	.when('/friendsList', {
 		templateUrl: 'views/friendsList.html',
 		controller: 'FriendController'
+	})
+	.when('/chat', {
+		templateUrl: 'views/chat.html',
+		controller: 'ChatController'
 	})
 	.otherwise({
 		templateUrl: 'views/home.html',

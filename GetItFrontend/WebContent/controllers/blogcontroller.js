@@ -75,15 +75,18 @@ app.controller('BlogController', function($scope, BlogService, $location, $rootS
 		});
 	}
 	
-	BlogService.getBlogDetails(id).then(function(response){
-		$scope.blogDetails = response.data;
-	}, function(response) {
-		if(response.status == 401)
-		{
-			$scope.error = response.data;
-			$location.path("/login");
-		}
-	});
+	if(id != undefined)
+	{
+		BlogService.getBlogDetails(id).then(function(response){
+			$scope.blogDetails = response.data;
+		}, function(response) {
+			if(response.status == 401)
+			{
+				$scope.error = response.data;
+				$location.path("/login");
+			}
+		});
+	}
 	
 	$scope.updateApprovalStatus = function() {
 		BlogService.updateApprovalStatus($scope.blogDetails, $scope.rejectionReason).then(function(response){
@@ -147,25 +150,14 @@ app.controller('BlogController', function($scope, BlogService, $location, $rootS
 		});
 	}
 	
-	BlogService.userLiked(id).then(function(response) {
-		if(response.data == '')
-			$scope.liked = false;
-		else
-			$scope.liked = true;
-		alert($scope.liked);
-	}, function(response) {
-		if(response.status == 401)
-		{
-			$scope.error = response.data;
-			$location.path("/login");
-		}
-	});
-	
-	$scope.updateBlogLikes = function() {
-		BlogService.updateBlogLikes($scope.blogDetails).then(function(response) {
-			//update likes & alter the glyphicon thumbsup color
-			$scope.blogDetails = response.data;
-			$scope.liked = !$scope.liked;
+	if(id != undefined)
+	{
+		BlogService.userLiked(id).then(function(response) {
+			if(response.data == '')
+				$scope.liked = false;
+			else
+				$scope.liked = true;
+			alert($scope.liked);
 		}, function(response) {
 			if(response.status == 401)
 			{
@@ -173,6 +165,23 @@ app.controller('BlogController', function($scope, BlogService, $location, $rootS
 				$location.path("/login");
 			}
 		});
+	}
+	
+	if($scope.blogDetails != undefined)
+	{
+		$scope.updateBlogLikes = function() {
+			BlogService.updateBlogLikes($scope.blogDetails).then(function(response) {
+				//update likes & alter the glyphicon thumbsup color
+				$scope.blogDetails = response.data;
+				$scope.liked = !$scope.liked;
+			}, function(response) {
+				if(response.status == 401)
+				{
+					$scope.error = response.data;
+					$location.path("/login");
+				}
+			});
+		}
 	}
 	
 	$scope.addBlogComment = function() {
