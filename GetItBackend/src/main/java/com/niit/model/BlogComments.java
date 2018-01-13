@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="tbl_blogcoments")
+@Table(name="tbl_blogcomments")
 public class BlogComments 
 {
 	@Id

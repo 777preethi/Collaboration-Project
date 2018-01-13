@@ -85,7 +85,7 @@ public class FriendDaoImpl implements FriendDao
 		SQLQuery query = session.createSQLQuery("SELECT * FROM tbl_user WHERE userName IN "
 				+ "(SELECT toId FROM tbl_friend WHERE fromId = ? AND status = 'A' "
 				+ " UNION "
-				+ " SELECT fromId FROM tbl_friend WHERE toId = ?AND status = 'A')");
+				+ " SELECT fromId FROM tbl_friend WHERE toId = ? AND status = 'A')");
 		query.setString(0, username);
 		query.setString(1, username);
 		query.addEntity(User.class);
