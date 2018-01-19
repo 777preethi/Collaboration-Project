@@ -75,9 +75,26 @@
 {
 	margin-bottom: 40px;
 }
+.left40
+{
+	margin-left: 40px;
+}
+.left25
+{
+	margin-left: 25px;
+}
+.font18
+{
+	font-size:18px;
+}
 .errorStyle
 {
 	color: #CA0101 !important;
+	margin-bottom: 10px;
+}
+.successStyle
+{
+	color: #D259A1 !important;
 	margin-bottom: 10px;
 }
 .navbar
@@ -144,6 +161,15 @@
 {
 	background-color: rgba(224, 138, 189, 0.57) !important;
 }
+.bannerImageStyle
+{
+	width: 1550px !important;
+    height: 350px !important;
+}
+.jobImageStyle
+{
+	width:200px;
+}
 .iconStyle
 {
 	width:20px;
@@ -160,6 +186,7 @@
 .jobListContent
 {
 	background-color: #f19bcd5e !important;
+	border-radius: 10px !important;
 }
 .glyphiconStyle
 {
@@ -188,10 +215,14 @@
 .likedStyle
 {
 	color: #D259A1 !important;
+	font-weight: bold !important;
+    font-size: 18px !important;
 }
 .unlikedStyle
 {
 	color: #000000 !important;
+	font-weight: bold !important;
+    font-size: 18px !important;
 }
 .notificationStyle
 {
@@ -207,9 +238,51 @@
 }
 .NotViewedNotificationStyle
 {
-	color: #D259A1 !important;
+	color: #000000 !important;
 }
 .ViewedNotificationStyle
 {
-	color: #000000 !important;
+	color: #D259A1 !important;
+}
+.friendImageStyle
+{
+	width: 180px;
+    height: 180px;
+    border-radius: 50%;
+}
+.profilePictureStyle
+{
+	width: 50px;
+    height: 58px;
+    border-radius: 50%;
+}
+.horizontalBar
+{
+	margin-top: 3px !important;
+    margin-bottom: 3px !important;
+    border-top: 1px solid #d259a1 !important;
+}
+.btn-default {
+    color: #d259a1 !important;
+    background-color: #fadaed !important;
+    border-color: #d259a1 !important;
+}
+.calenderDiv
+{
+	border: 1px solid #d259a1;
+}
+.commentImageStyle
+{
+	width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.commentListStyle
+{
+	list-style: none;
+    margin-left: -20px;
+}
+.listStyle
+{
+	list-style: none;
 }

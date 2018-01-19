@@ -33,10 +33,6 @@ app.factory('BlogService', function($http) {
 		return $http.put(BASE_URL+"/editblogsubmit",blog);
 	}
 	
-	blogService.deleteBlog = function(blogId) {
-		return $http.get(BASE_URL+"/deleteblog/"+blogId)
-	}
-	
 	blogService.userLiked = function(id) {
 		return $http.get(BASE_URL+"/userliked/"+id);
 	}

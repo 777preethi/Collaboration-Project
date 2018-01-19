@@ -35,7 +35,7 @@
   <div class="container-fluid">
     <img alt="Logo" src="resources/images/getIt.png" class="shiftLeft logoImg" />
     <ul class="nav navbar-nav">
-      <li><a href="#/">Home</a></li>
+      <li><a href="#/home">Home</a></li>
       <li class="dropdown cursorp" ng-show="currentUser.userName">
         <a class="dropdown-toggle" data-toggle="dropdown">Jobs
         <span class="caret"></span></a>
@@ -63,6 +63,19 @@
       <li class="dropdown cursorp" ng-show="currentUser.userName"><a href="#/chat">Chat</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+      	<li ng-show="currentUser.userName">
+      		<img src="http://localhost:8081/GetItMiddleware/getimage/{{currentUser.userName}}" class="profilePictureStyle" />
+      	</li>
+	    <li class="dropdown cursorp" ng-show="currentUser.userName"> 
+	        <a class="dropdown-toggle" data-toggle="dropdown">{{currentUser.userName | uppercase}}
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#/editprofile">Update Profile</a></li>
+	          <li><a href="#/uploadPic">Change Picture</a></li>
+	          <li ng-show="currentUser.role == 'ADMIN'"><a href="#/customerfeedbacks">Customer Feedbacks</a></li>
+	          <li><a ng-click="logout()">Logout</a></li>
+	        </ul>
+	    </li>
     	<li class="dropdown cursorp" ng-show="currentUser.userName"> 
 	        <a class="dropdown-toggle" data-toggle="dropdown">
 	        	<span class="glyphicon glyphicon-bell glyphiconStyle" ng-click="updateLength()"></span>
@@ -70,31 +83,19 @@
 	        </a>
 	        <ul class="dropdown-menu">
 	        	<li class="NotViewedNotificationStyle" ng-repeat="notViewed in notViewedNotification">
-	        		<a href="" ng-click="updateNotificationViewed(notViewed.id)">
+	        		<a class="NotViewedNotificationStyle" href="" ng-click="updateNotificationViewed(notViewed.id)">
 	        			"<b>{{notViewed.blogTitle}}</b>" is <b>{{notViewed.approvalStatus}}</b>
 	        			<span ng-show="notViewed.approvalStatus == 'Rejected'"> due to reason '{{notViewed.rejectionReason}}'</span>
 	        		</a>
 	        	</li>
 	        	<li class="ViewedNotificationStyle" ng-repeat="viewed in viewedNotification">
-	        		<a href="">
+	        		<a href="" class="ViewedNotificationStyle">
 	        			"<b>{{viewed.blogTitle}}</b>" is <b>{{viewed.approvalStatus}}</b>
 	        			<span ng-show="viewed.approvalStatus == 'Rejected'"> due to reason '{{viewed.rejectionReason}}'</span>
 	        		</a>
 	        	</li>
 	        </ul>
       	</li>
-      	<li ng-show="currentUser.userName">
-      		<img src="http://localhost:8081/GetItMiddleware/getimage/{currentUser.userName}" width="40" height="40" />
-      	</li>
-	    <li class="dropdown cursorp" ng-show="currentUser.userName"> 
-	        <a class="dropdown-toggle" data-toggle="dropdown">Welcome {{currentUser.userName | uppercase}}
-	        <span class="caret"></span></a>
-	        <ul class="dropdown-menu">
-	          <li><a href="#/editprofile">Update Profile</a></li>
-	          <li><a href="#/uploadPic">Change Picture</a></li>
-	          <li><a ng-click="logout()">Logout</a></li>
-	        </ul>
-	    </li>
 	    <li ng-hide="currentUser.userName"><a href="#/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 	    <li ng-hide="currentUser.userName"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
@@ -108,13 +109,13 @@
 <footer>
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 footerBackground">
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 top10 bottom10" align="left">
-			<a href="" class="footerContent">About Us</a>
+			<a href="#/aboutus" class="footerContent">About Us</a>
 			<span class="footerContent">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-			<a href="" class="footerContent">Help</a>
+			<a href="#/help" class="footerContent">Help</a>
 			<div class="clear top5"></div>
-			<a href="" class="footerContent">Privacy Policy</a>
+			<a href="#/privacypolicy" class="footerContent">Privacy Policy</a>
 			<span class="footerContent">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-			<a href="" class="footerContent">Contact Us</a>
+			<a href="#/contactus" class="footerContent">Contact Us</a>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 top20" align="center" valign="center">
 				<span class="footerContent">All rights reserved @ GetIt.</span>

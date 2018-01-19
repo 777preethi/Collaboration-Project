@@ -14,7 +14,7 @@ app.controller('BlogController', function($scope, BlogService, $location, $rootS
 		BlogService.addBlog($scope.blog).then(function(response) {
 			console.log(response.data);
 			alert("Blog added successfully.")
-			$location.path("/home");
+			$location.path("/getBlogs");
 		}, function(response) {
 			console.log(response.data);
 			if(response.status == 401)
@@ -116,28 +116,11 @@ app.controller('BlogController', function($scope, BlogService, $location, $rootS
 		});
 	}
 	
-	$scope.editJobSubmit = function() {
+	$scope.editBlogSubmit = function() {
 		BlogService.editBlogSubmit($scope.blog).then(function(response) {
 			alert("Updated Blog Successfully.");
-			$location.path("/home");
+			$location.path("/getBlogs");
 		}, function(response) {//401, 500
-			if(response.status == 401)
-			{
-				$location.path("/login");
-			}
-			if(response.status == 500)
-			{
-				$scope.error = response.data;
-				$location.path("/editBlog");
-			}
-		});
-	}
-	
-	$scope.deleteBlog = function(blogId) {
-		BlogService.deleteBlog(blogId).then(function(response){
-			alert("Deleted Blog Successfully.");
-			$location.path("/home");
-		}, function(response) {
 			if(response.status == 401)
 			{
 				$location.path("/login");
@@ -157,7 +140,7 @@ app.controller('BlogController', function($scope, BlogService, $location, $rootS
 				$scope.liked = false;
 			else
 				$scope.liked = true;
-			alert($scope.liked);
+			//alert($scope.liked);
 		}, function(response) {
 			if(response.status == 401)
 			{
@@ -167,33 +150,29 @@ app.controller('BlogController', function($scope, BlogService, $location, $rootS
 		});
 	}
 	
-	if($scope.blogDetails != undefined)
-	{
-		$scope.updateBlogLikes = function() {
-			BlogService.updateBlogLikes($scope.blogDetails).then(function(response) {
-				//update likes & alter the glyphicon thumbsup color
-				$scope.blogDetails = response.data;
-				$scope.liked = !$scope.liked;
-			}, function(response) {
-				if(response.status == 401)
-				{
-					$scope.error = response.data;
-					$location.path("/login");
-				}
-			});
-		}
+	$scope.updateBlogLikes = function() {
+		BlogService.updateBlogLikes($scope.blogDetails).then(function(response) {
+			//update likes & alter the glyphicon thumbsup color
+			$scope.blogDetails = response.data;
+			$scope.liked = !$scope.liked;
+		}, function(response) {
+			if(response.status == 401)
+			{
+				$scope.error = response.data;
+				$location.path("/login");
+			}
+		});
 	}
 	
 	$scope.addBlogComment = function() {
-		if($scope.commentText == undefined)
+		if($scope.blogComments.commentText == undefined)
 		{
 			alert("Please enter comment.");
 		}
 		else
 		{
-			BlogService.addBlogComment($scope.commentText,id).then(function(response) {
-				alert(response.status);
-				$scope.commentText = '';
+			BlogService.addBlogComment($scope.blogComments.commentText,id).then(function(response) {
+				$scope.blogComments .commentText = '';
 				$scope.blogDetails = response.data;	//List of all comments of that particular blog
 			}, function(response){
 				if(response.status == 401)

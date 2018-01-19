@@ -1,7 +1,7 @@
 /**
  * Home Controller
  */
-app.controller('HomeController', function(HomeService, $location, $rootScope) 
+app.controller('HomeController', function(HomeService, $location, $rootScope, $scope) 
 {
 	function getNotification()
 	{
@@ -48,4 +48,47 @@ app.controller('HomeController', function(HomeService, $location, $rootScope)
 			}
 		});
 	}
+	
+	function latestJobs()
+	{
+		HomeService.latestJobs().then(function(response) {
+			$rootScope.latestJobs = response.data;
+		}, function(response) {
+			$location.path("/home");
+		});
+	}
+	latestJobs();
+	
+	$scope.submitFeedback = function() {
+		HomeService.submitFeedback($scope.feedback).then(function(response) {
+			$scope.feedbackDetails = response.data;
+			$scope.feedbackSuccess = "Feedback Submitted Successfully.";
+			$scope.feedback = "";
+		}, function(response) {
+			if(response.status == 401)
+			{
+				$scope.error = response.data;
+				$location.path("/login");
+			}
+		});
+	}
+	
+	function getCustomerFeedbacks()
+	{
+		HomeService.customerFeedbacks().then(function(response) {
+			$scope.CustomerFeedbacks = response.data;
+			console.log($scope.CustomerFeedbacks);
+		}, function(response) {
+			if(response.status == 401)
+			{
+				$scope.error = response.data;
+				$location.path("/login");
+			}
+		});
+	}
+	if($rootScope.currentUser != undefined)
+	{
+		getCustomerFeedbacks();
+	}	
+	
 });

@@ -44,6 +44,10 @@ app.config(function($routeProvider) {
 		templateUrl: 'views/editBlog.html',
 		controller: 'BlogController'
 	})
+	.when('/getblogapprovaldetail/:id', {
+		templateUrl: 'views/blogApprovalDetails.html',
+		controller: 'BlogController'
+	})
 	.when('/getblogdetail/:id', {
 		templateUrl: 'views/blogDetails.html',
 		controller: 'BlogController'
@@ -66,6 +70,23 @@ app.config(function($routeProvider) {
 	.when('/chat', {
 		templateUrl: 'views/chat.html',
 		controller: 'ChatController'
+	})
+	.when('/aboutus', {
+		templateUrl: 'views/aboutUs.html'
+	})
+	.when('/help', {
+		templateUrl: 'views/help.html'
+	})
+	.when('/privacypolicy', {
+		templateUrl: 'views/privacyPolicy.html'
+	})
+	.when('/contactus', {
+		templateUrl: 'views/contactUs.html',
+		controller: 'HomeController'
+	})
+	.when('/customerfeedbacks', {
+		templateUrl: 'views/customerFeedback.html',
+		controller: 'HomeController'
 	})
 	.otherwise({
 		templateUrl: 'views/home.html',

@@ -17,5 +17,17 @@ app.factory('HomeService', function($http) {
 		return $http.put(BASE_URL+"/updatenotificationviewed/"+notificationId);
 	}
 	
+	homeService.latestJobs = function() {
+		return $http.get(BASE_URL+"/latestjobs");
+	}
+	
+	homeService.submitFeedback = function(feedback) {
+		return $http.post(BASE_URL+"/submitfeedback",feedback);
+	}
+	
+	homeService.customerFeedbacks = function() {
+		return $http.get(BASE_URL+"/customerfeedbacks");
+	}
+	
 	return homeService;
 });

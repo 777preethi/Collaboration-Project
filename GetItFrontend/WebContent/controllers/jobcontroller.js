@@ -9,7 +9,7 @@ app.controller('JobController', function($scope, JobService, $location, $rootSco
 		JobService.addJob($scope.job).then(function(response) {
 			console.log(response.data);
 			alert("Job added successfully.")
-			$location.path("/home");
+			$location.path("/alljobs");
 		}, function(response) {
 			console.log(response.data);
 			if(response.status == 401)
