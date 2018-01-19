@@ -127,28 +127,6 @@ public class BlogsController
 		return new ResponseEntity<Blogs>(blog,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/deleteblog/{blogId}", method=RequestMethod.GET)
-	public ResponseEntity<?> deleteBlog(@PathVariable int blogId, HttpSession session)
-	{
-		String username = (String)session.getAttribute("username");
-		if(username == null)
-		{
-			ErrorClazz error = new ErrorClazz(5, "Unauthorized Acces.");
-			return new ResponseEntity<ErrorClazz>(error, HttpStatus.UNAUTHORIZED);
-		}
-		Blogs blog = blogsDao.getBlogById(blogId);
-		try
-		{
-			blogsDao.deleteBlog(blog);
-		}
-		catch(Exception e)
-		{
-			ErrorClazz error = new ErrorClazz(6, e.getMessage());
-			return new ResponseEntity<ErrorClazz>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Blogs>(blog,HttpStatus.OK);
-	}
-	
 	@RequestMapping(value="/userliked/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> userLikedPost(HttpSession session, @PathVariable int id)
 	{
@@ -203,6 +181,8 @@ public class BlogsController
 			ErrorClazz error = new ErrorClazz(1, "Unable to post comments "+e.getMessage());
 			return new ResponseEntity<ErrorClazz>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<Blogs>(blog, HttpStatus.OK);
+
+		Blogs updatedBlog = blogsDao.getBlogById(id);
+		return new ResponseEntity<Blogs>(updatedBlog, HttpStatus.OK);
 	}
 }

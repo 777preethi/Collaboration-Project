@@ -40,15 +40,20 @@ public class ProfilePictureController
 	@RequestMapping(value="/getimage/{username}", method=RequestMethod.GET)
 	public @ResponseBody byte[] getProfilePicture(HttpSession session, @PathVariable String username)
 	{
+		System.out.println(username);
 		String loginId = (String)session.getAttribute("username");
 		if(loginId == null)
 		{
 			return null;
 		}
+		System.out.println(username);
+		System.out.println(loginId);
 		ProfilePicture profilePicture = profilePictureDao.getProfilePicture(username);
 		if(profilePicture == null)
 		{
-			return null;
+			String defaultImageName = "no_image";
+			ProfilePicture defaultImage = profilePictureDao.getProfilePicture(defaultImageName);
+			return defaultImage.getImage();
 		}
 		return profilePicture.getImage();
 	}
