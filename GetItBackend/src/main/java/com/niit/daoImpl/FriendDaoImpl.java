@@ -25,7 +25,7 @@ public class FriendDaoImpl implements FriendDao
 	{
 		Session session = sessionFactory.getCurrentSession();
 		SQLQuery query = session.createSQLQuery("SELECT * FROM tbl_user WHERE userName IN "
-				+ " (SELECT userName FROM tbl_user WHERE userName = ? "
+				+ " (SELECT userName FROM tbl_user WHERE userName != ? "
 				+ " minus "
 				+ " (SELECT fromId FROM tbl_friend WHERE toId = ? "
 				+ " UNION "

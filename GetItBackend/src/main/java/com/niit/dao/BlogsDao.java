@@ -17,7 +17,6 @@ public interface BlogsDao
 	Blogs getBlogById(int id);
 	void updateApprovalStatus(Blogs blogs, String rejectionReason);
 	void updateBlog(Blogs blog);
-	void deleteBlog(Blogs blog);
 	
 	// select * from tbl_bloglikes where blogs_id=? and user_username=?
 	// if user already liked the post, 1 object

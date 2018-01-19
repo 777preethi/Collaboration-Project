@@ -10,4 +10,5 @@ public interface JobDao
 	Job getJob(int jobId);
 	void updateJob(Job job);
 	void deleteJob(Job job);
+	List<Job> latestJobs();
 }

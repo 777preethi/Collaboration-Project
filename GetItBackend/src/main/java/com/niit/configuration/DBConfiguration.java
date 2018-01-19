@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.niit.model.BlogComments;
 import com.niit.model.BlogLikes;
 import com.niit.model.Blogs;
+import com.niit.model.Feedback;
 import com.niit.model.Friend;
 import com.niit.model.Job;
 import com.niit.model.Notification;
@@ -32,7 +33,7 @@ public class DBConfiguration
 		hp.setProperty("hibernate.hbm2ddl.auto", "update");
 		hp.setProperty("hibernate.show_sql", "true");
 		lsfb.addProperties(hp);
-		Class classes[] = new Class[] {User.class, Job.class, Blogs.class, Notification.class, BlogLikes.class, BlogComments.class, ProfilePicture.class, Friend.class};
+		Class classes[] = new Class[] {User.class, Job.class, Blogs.class, Notification.class, BlogLikes.class, BlogComments.class, ProfilePicture.class, Friend.class, Feedback.class};
 		return lsfb.addAnnotatedClasses(classes).buildSessionFactory();		
 	}
 	

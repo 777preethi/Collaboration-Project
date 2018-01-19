@@ -51,4 +51,13 @@ public class JobDaoImpl implements JobDao
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(job);
 	}
+
+	public List<Job> latestJobs() 
+	{
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Job ORDER BY id DESC");
+		query.setMaxResults(6);
+		List<Job> latestJobs = query.list();
+		return latestJobs;
+	}
 }

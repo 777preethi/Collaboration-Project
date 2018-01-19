@@ -3,6 +3,7 @@ package com.niit.daoImpl;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,16 +72,10 @@ public class BlogsDaoImpl implements BlogsDao
 		session.update(blog);		
 	}
 
-	public void deleteBlog(Blogs blog) 
-	{
-		Session session = sessionFactory.getCurrentSession();
-		session.delete(blog);		
-	}
-
 	public BlogLikes userLikedPost(Blogs blog, User user) 
 	{
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from BlogLikes where blog.id=? and user.username=?");
+		Query query = session.createQuery("from BlogLikes where blog.id=? and user.userName=?");
 		query.setInteger(0, blog.getId());
 		query.setString(1, user.getUserName());
 		BlogLikes blogLikes = (BlogLikes)query.uniqueResult();
