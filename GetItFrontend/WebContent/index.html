@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; application/json; charset=ISO-8859-1">
 	<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon" />	
 	<title>Get It</title>
 	<link rel="stylesheet" href="resources/css/styles.css">
@@ -60,7 +60,9 @@
           <li><a href="#/friendsList">My Friends</a></li>
         </ul>
       </li>
-      <li class="dropdown cursorp" ng-show="currentUser.userName"><a href="#/chat">Chat</a></li>
+      <li class="dropdown cursorp" ng-show="currentUser.userName">
+      	<a href="#/chat">Chat</a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       	<li ng-show="currentUser.userName">

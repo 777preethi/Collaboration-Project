@@ -1,16 +1,15 @@
 /**
  * Chat Controller
  */
-app.controller('ChatController', function($rootScope ,$scope, socket) 
-{	
-	alert('Entering Chat Controller');
+app.controller('ChatController', function($rootScope ,$scope, socket)
+{
+    alert('entering chat controller')
     $scope.chats = [];
     $scope.stompClient = socket.stompClient;
-    $scope.users=[];
+    $scope.users=[]
     $scope.$on('sockConnected', function(event, frame) {
-    	alert('Sock Connected');
+    	alert('sockconnected')
         $scope.userName=$rootScope.currentUser.username;
-        
         $scope.stompClient.subscribe("/topic/join", function(message) {        	
             user = JSON.parse(message.body);
             console.log(user)           
@@ -49,8 +48,7 @@ app.controller('ChatController', function($rootScope ,$scope, socket)
         $scope.user=$rootScope.currentUser.username;       
         $scope.stompClient.subscribe( "/queue/chats/"+$scope.userName, function(message) {        	
             $scope.processIncomingMessage(message, false);
-        });        
-        
+        });                
         $scope.stompClient.subscribe("/queue/chats", function(message) {        	
             $scope.processIncomingMessage(message, true);
         });    
@@ -66,14 +64,14 @@ app.controller('ChatController', function($rootScope ,$scope, socket)
     $scope.processIncomingMessage = function(message, isBroadcast) {
         message = JSON.parse(message.body);
         message.direction = 'incoming';
-        message.broadcast = isBroadcast;
+        message.broadcast=isBroadcast
         if(message.from != $scope.userName) {
         	$scope.addChat(message);
             $scope.$apply(); // since inside subscribe closure
         }
     };
- 
+    
     $scope.addChat = function(chat) {
         $scope.chats.push(chat);
-    };	
+    };
 });
